@@ -1,0 +1,43 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <h1 class="login-title">Inicia Sesión</h1>
+      <p class="login-subtitle">Accede con tu correo electrónico y contraseña</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="submitForm()" class="login-form" novalidate>
+      <div class="form-grid">
+        <app-form-field
+          label="Correo electrónico"
+          type="email"
+          [control]="getControl('email')"
+          [required]="true"
+        />
+        <app-form-field
+          label="Contraseña"
+          type="password"
+          [control]="getControl('password')"
+          [required]="true"
+        />
+      </div>
+      <div class="form-actions">
+        <app-button
+          text="Iniciar sesión"
+          type="submit"
+          [loading]="isSubmitting"
+          variant="primary"
+        ></app-button>
+      </div>
+
+      <div class="register-link">
+        <span>¿No tienes una cuenta?</span>
+        <app-button
+          text="Regístrate"
+          variant="text"
+          type="button"
+          (onClick)="goToRegistro()"
+        ></app-button>
+      </div>
+    </form>
+  </div>
+</div>

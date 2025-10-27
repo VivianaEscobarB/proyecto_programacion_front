@@ -1,0 +1,12 @@
+<input
+  [type]="type"
+  [id]="id"
+  [name]="name"
+  [placeholder]="placeholder"
+  [value]="value"
+  [disabled]="disabled"
+  [class.input-error]="hasError"
+  (input)="onInputChange($event)"
+  (blur)="onBlur()"
+  class="input-field"
+/>

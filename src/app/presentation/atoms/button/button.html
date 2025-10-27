@@ -1,0 +1,13 @@
+<button
+  [type]="type"
+  [disabled]="disabled || loading"
+  [class]="'btn btn-' + variant"
+  [class.btn-full-width]="fullWidth"
+  [class.btn-loading]="loading"
+  (click)="handleClick($event)"
+>
+  <span class="btn-content" [class.btn-content-loading]="loading">
+    {{ text }}
+  </span>
+  <span *ngIf="loading" class="btn-spinner"></span>
+</button>
