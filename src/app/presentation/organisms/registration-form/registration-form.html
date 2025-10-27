@@ -1,0 +1,96 @@
+<div class="registration-container">
+  <div class="registration-card">
+    <div class="registration-header">
+      <h1 class="registration-title">Crea tu Cuenta</h1>
+      <p class="registration-subtitle">Regístrate y accede a buscar tu nueva aventura</p>
+    </div>
+
+    <form [formGroup]="registrationForm" (ngSubmit)="submitForm()" novalidate class="registration-form">
+      <div class="form-grid">
+        <app-form-field 
+          label="Nombres"
+          [control]="getControl('nombres')"
+          [required]="true"
+        />
+        <app-form-field 
+          label="Apellidos"
+          [control]="getControl('apellidos')"
+          [required]="true"
+        />
+        <app-form-field 
+          label="Correo electrónico"
+          type="email"
+          [control]="getControl('email')"
+          [required]="true"
+        />
+        <app-form-field 
+          label="Identificación"
+          [control]="getControl('identificacion')"
+          [required]="true"
+        />
+        <app-form-field-select
+          label="Nacionalidad"
+          [options]="nacionalidades"
+          [control]="getControl('nacionalidad')"
+          [required]="true"
+        />
+        <app-form-field-date 
+          label="Fecha de nacimiento"
+          [control]="getControl('fechaNacimiento')"
+          [required]="true"
+        />
+        <app-form-field 
+          label="Teléfono"
+          type="tel"
+          [control]="getControl('telefono')"
+          [required]="true"
+        />
+        <app-form-field-select
+          label="País"
+          [options]="paises"
+          [control]="getControl('pais')"
+          [required]="true"
+        />
+        <app-form-field-select
+          label="Departamento"
+          [options]="departamentos"
+          [control]="getControl('departamento')"
+          [required]="true"
+        />
+        <app-form-field-select
+          label="Ciudad"
+          [options]="ciudades"
+          [control]="getControl('ciudad')"
+          [required]="true"
+        />
+        <div class="form-field-full">
+          <app-form-field 
+            label="Dirección"
+            [control]="getControl('direccion')"
+            [required]="true"
+          />
+        </div>
+        <app-form-field 
+          label="Contraseña"
+          type="password"
+          [control]="getControl('password')"
+          [required]="true"
+        />
+        <app-form-field 
+          label="Confirmar contraseña"
+          type="password"
+          [control]="getControl('confirmPassword')"
+          [required]="true"
+        />
+      </div>
+      <div class="form-actions">
+        <app-button
+          text="Registrarse"
+          type="submit"
+          [loading]="isSubmitting"
+          variant="primary"
+        ></app-button>
+      </div>
+    </form>
+  </div>
+</div>

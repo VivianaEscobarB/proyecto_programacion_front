@@ -1,0 +1,12 @@
+<div class="form-field">
+  <app-label [text]="label" [required]="required"></app-label>
+  <app-select-dropdown
+    [options]="options"
+    [formControl]="control"
+    [hasError]="hasError"
+  ></app-select-dropdown>
+
+  <div class="form-error" *ngIf="hasError">
+    {{ errorMessage }}
+  </div>
+</div>

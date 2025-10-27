@@ -1,0 +1,11 @@
+<div class="form-field">
+  <app-label [text]="label" [required]="required"></app-label>
+  <app-date-picker
+    [formControl]="control"
+    [hasError]="hasError"
+  ></app-date-picker>
+
+  <div class="form-error" *ngIf="hasError">
+    {{ errorMessage }}
+  </div>
+</div>
