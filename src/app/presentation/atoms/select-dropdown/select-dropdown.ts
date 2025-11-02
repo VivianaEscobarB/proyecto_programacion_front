@@ -12,7 +12,7 @@ export interface SelectOption {
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './select-dropdown.html',
-  styleUrls: ['./select-dropdown.css'],
+  styleUrls: ['./select-dropdown.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

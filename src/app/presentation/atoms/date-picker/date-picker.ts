@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './date-picker.html',
-  styleUrls: ['./date-picker.css'],
+  styleUrls: ['./date-picker.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

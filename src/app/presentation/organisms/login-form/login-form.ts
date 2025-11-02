@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
     ButtonComponent
   ],
   templateUrl: './login-form.html',
-  styleUrls: ['./login-form.css']
+  styleUrls: ['./login-form.scss']
 })
 export class LoginFormComponent implements OnInit {
   loginForm!: FormGroup;

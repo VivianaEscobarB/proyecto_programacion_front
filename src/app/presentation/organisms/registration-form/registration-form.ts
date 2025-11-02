@@ -19,7 +19,7 @@ import { ButtonComponent } from '../../atoms/button/button';
     ButtonComponent
   ],
   templateUrl: './registration-form.html',
-  styleUrls: ['./registration-form.css']
+  styleUrls: ['./registration-form.scss']
 })
 export class RegistrationFormComponent implements OnInit {
   registrationForm!: FormGroup;

@@ -1,27 +1,31 @@
+@use '../../../../assets/styles/variables' as v;
+
 .login-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  background-color: #F5F6F8;
+  width: 100%;
+  
+  font-family: v.$font-family-main;
 }
 
 .login-card {
-  width: 100%;
-  max-width: 420px;
-  background-color: white;
+  
+  max-width: 581px;
+  background-color: v.$color-secondary;
   border-radius: 0.75rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-  padding: 2.5rem 2rem;
+  padding: 3rem 3rem;
 }
 
 .login-header {
   text-align: center;
   margin-bottom: 2rem;
   .login-title {
+    font-family: v.$font-family-main;
     font-size: 1.5rem;
-    font-weight: 700;
-    color: #3B4C8B;
+    font-weight: bold;
+    color: v.$color-primary;
   }
   .login-subtitle {
     color: #6B7280;

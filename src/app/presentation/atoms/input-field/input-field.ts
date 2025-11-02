@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './input-field.html',
-  styleUrls: ['./input-field.css'],
+  styleUrls: ['./input-field.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

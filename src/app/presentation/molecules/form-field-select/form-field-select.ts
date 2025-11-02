@@ -9,7 +9,7 @@ import { LabelComponent } from '../../atoms/label/label';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, SelectDropdownComponent, LabelComponent],
   templateUrl: './form-field-select.html',
-  styleUrls: ['./form-field-select.css']
+  styleUrls: ['./form-field-select.scss']
 })
 export class FormFieldSelectComponent {
   @Input() label: string = '';

@@ -9,7 +9,7 @@ import { LabelComponent } from '../../atoms/label/label';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, DatePickerComponent, LabelComponent],
   templateUrl: './form-field-date.html',
-  styleUrls: ['./form-field-date.css']
+  styleUrls: ['./form-field-date.scss']
 })
 export class FormFieldDate {
   @Input() label: string = '';
