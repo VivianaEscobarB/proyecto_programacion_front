@@ -11,34 +11,36 @@
 }
 
 .login-main {
-  width: 80%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   align-content: center;
-
   position: relative;
-  background-color: transparent;
+ 
 }
 
 .llave-bg {
   position: absolute;
+  width: 90%; 
+  height: 90%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   
-  height: 100%;
-  z-index: 0;
-  margin: auto;
-  padding: auto;
+ 
 
   .svg-bg {
     height: 100%;
-    
+    width: 100%; 
+    display: block;
   }
 }
 .app-login-form {
   position: relative;
-  z-index: 3;
+
   border-radius: 18px;
-  margin: 2rem rem;
+  margin: 2rem 2rem;
   
-  margin-left: 38vw; // Ajusta para centrar respecto al fondo
+  margin-left: 34vw; // Ajusta para centrar respecto al fondo
 }

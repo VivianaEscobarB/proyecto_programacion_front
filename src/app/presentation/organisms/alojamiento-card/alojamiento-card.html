@@ -1,0 +1,10 @@
+<div class="card">
+  <img [src]="alojamiento.imagenUrl" [alt]="alojamiento.nombre" />
+  <div class="info">
+    <div class="nombre">{{ alojamiento.nombre }}</div>
+    <div class="precio">{{ alojamiento.precio }}</div>
+    <div class="estrellas">
+      <span *ngFor="let star of [].constructor(alojamiento.estrellas)">★</span>
+    </div>
+  </div>
+</div>

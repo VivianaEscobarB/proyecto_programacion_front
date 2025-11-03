@@ -1,0 +1,57 @@
+@use '../../../../assets/styles/variables' as v;
+
+.main-content {
+  width: 90%;
+  margin: 3rem auto;
+  background-color: v.$color-secondary; ;
+
+  .banner-imagenes {
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 2.3rem;
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+  }
+  .buscador {
+    margin: 2.3rem 0;
+    display: flex;
+    input {
+      flex: 1;
+      border-radius: 1.5rem;
+      border: 1.5px solid v.$color-primary;
+      margin-right: 6px;
+      font-size: 1rem;
+      padding: .7rem 1.2rem;
+      :focus {
+        outline: none;
+      }
+    }
+    button {
+      background: v.$color-primary;
+      color: v.$color-secondary;
+      border: none;
+      font-size: 1.5rem;
+      border-radius: 1.5rem;
+      padding: 0 .95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .items-lista {
+    display: flex;
+    gap: 1.1rem;
+    overflow-x: auto;
+    margin-bottom: 2.1rem;
+  }
+  h2 {
+    font-size: 1.09rem;
+    font-weight: 700;
+    color: #3B4C8B;
+    margin-bottom: 0.7rem;
+  }
+}

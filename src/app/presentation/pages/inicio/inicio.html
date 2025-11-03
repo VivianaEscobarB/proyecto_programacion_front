@@ -1,0 +1,33 @@
+<app-header></app-header>
+<main class="main-content">
+  <section class="banner-imagenes">
+    <img src="/assets/images/banner_inicio.png" />
+  </section>
+
+  <section class="buscador">
+    <input type="text" placeholder="Busca el departamento, la ciudad o el sitio donde quieres descansar" />
+    <button class=""><img src="/assets/images/iconos/lupa.png" alt=""></button>
+  </section>
+
+  <section class="departamentos">
+    <h2>Departamentos</h2>
+    <div class="items-lista">
+      <app-depto-card *ngFor="let depto of departamentos" [depto]="depto"></app-depto-card>
+    </div>
+  </section>
+
+  <section class="ciudades">
+    <h2>Ciudades</h2>
+    <div class="items-lista">
+      <app-ciudad-card *ngFor="let ciudad of ciudades" [ciudad]="ciudad"></app-ciudad-card>
+    </div>
+  </section>
+
+  <section class="alojamientos-destacados">
+    <h2>Alojamientos destacados</h2>
+    <div class="items-lista">
+      <app-alojamiento-card *ngFor="let aloj of alojamientos" [alojamiento]="aloj"></app-alojamiento-card>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>
