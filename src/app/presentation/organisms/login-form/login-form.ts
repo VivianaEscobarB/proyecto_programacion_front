@@ -49,8 +49,11 @@ export class LoginFormComponent {
   this.authService.login(this.loginForm.value).subscribe({
     next: (response) => {
     localStorage.setItem('token', response.token);
-    localStorage.setItem('roles', JSON.stringify(response.roles));
-    localStorage.setItem('email', response.email);
+    localStorage.setItem('userId', response.userId);
+    localStorage.setItem('userEmail', response.email);
+    localStorage.setItem('userRole', response.roles[0]);
+    localStorage.setItem('userImage', response.urlAccountPhoto.replace('/view', '/preview')); // Ajuste Google Drive
+    // Navegar a inicio, o lo que desees
 
     
       console.log('Respuesta de la API:', response); // Aquí se muestra en la consola

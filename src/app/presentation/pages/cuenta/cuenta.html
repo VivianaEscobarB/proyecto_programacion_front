@@ -1,0 +1,33 @@
+<app-header></app-header>
+<main class="user-account-main">
+  <section class="profile-block">
+    <div class="profile-card">
+      <div class="img-container">
+        <!-- Imagen desde localStorage o cargada dinámicamente -->
+        <img [src]="userPhotoUrl" alt="Foto perfil" />
+      </div>
+      <h2>{{ userFullName }}</h2>
+      <p class="user-rol">{{ userRole }}</p>
+    </div>
+    <div class="profile-details-card">
+      <h3>Datos personales</h3>
+      <div class="details-row">
+        <label>Fecha de nacimiento</label>
+        <span>{{ userData.fechaNacimiento }}</span>
+      </div>
+      <div class="details-row">
+        <label>Correo electronico</label>
+        <span>{{ userData.email }}</span>
+      </div>
+      <div class="details-row">
+        <label>Numero telefonico</label>
+        <span>{{ userData.telefono }}</span>
+      </div>
+      <div class="details-row">
+        <label>Direccion</label>
+        <span>{{ userData.direccion }}</span>
+      </div>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>

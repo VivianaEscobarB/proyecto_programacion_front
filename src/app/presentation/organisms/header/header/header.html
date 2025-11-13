@@ -1,14 +1,24 @@
 <header class="header">
   <div class="header__logo">
-    <img src="/assets/images/logo_text.svg" alt="Logo Horen" />
+    <img (click)="toMain()" src="/assets/images/logo_text.svg" alt="Logo Horen" />
   </div>
   <nav class="header__nav">
     <a routerLink="/" class="nav-link">Inicio</a>
     <a routerLink="/alojamientos" class="nav-link">Alojamientos</a>
     <a routerLink="/nosotros" class="nav-link">Nosotros</a>
   </nav>
-  <div class="header__actions">
+
+  <div class="header__actions" *ngIf="!isLoggedIn; else userBlock">
     <a routerLink="/login" class="btn btn-outline">Iniciar sesión</a>
     <a routerLink="/registro" class="btn btn-primary">Regístrate</a>
-  </div> 
+  </div>
+
+  <ng-template #userBlock>
+    <div class="header__user">
+      
+      <span class="user-rol">{{ user.role }}</span>
+      <button class="btn btn-outline" (click)="logout()">Cerrar sesión</button>
+      <img (click)="toAccount()" [src]="user.imageUrl" class="user-img" alt="Foto perfil" *ngIf="user.imageUrl"/>
+    </div>
+  </ng-template>
 </header>
