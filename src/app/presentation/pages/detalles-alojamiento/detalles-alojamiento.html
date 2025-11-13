@@ -1,19 +1,58 @@
 <app-header></app-header>
-<main class="accomadation-details-main">
-    <div class="main-container">
-        <div class="img-container-accomodation">
-            <img src="/assets/images/deptos/finca_robles.png" alt="imagen alojamiento" />
-        </div>
-        <div class="details-accomodation-card">
-            <h2>Detalles</h2>
-
-        </div>
+<div class="detalles-alojamiento">
+  <div class="detalles-header">
+    <button class="back-btn" aria-label="Volver">
+      <span class="arrow">&#8592;</span>
+    </button>
+    <h2 class="titulo-alojamiento">Finca Cafetera Los Robles</h2>
+    <div class="guardar-box">
+      <span class="guardar-text">Guardar</span>
+      <span class="icono-guardar">&#9825;</span>
     </div>
-    <div class="details-container">
-        
-
+  </div>
+  <!-- Organismo Principal: Información del Alojamiento -->
+  <section class="info-principal">
+    <div class="imagen-alojamiento">
+      <img [src]="alojamiento.imagen" alt="Piscina en Finca Cafetera Los Robles">
     </div>
-  
-</main>
+    <div class="reserva-box">
+      <form (ngSubmit)="reservar()">
+        <div class="campos-fechas">
+          <app-label text="Llegada"></app-label>
+          <input type="date" [(ngModel)]="fechaLlegada" name="fechaLlegada">
+          <app-label text="Salida"></app-label>
+          <input type="date" [(ngModel)]="fechaSalida" name="fechaSalida">
+        </div>
+        <div class="campo-huespedes">
+          <app-label text="Huéspedes"></app-label>
+          <input type="number" min="1" [(ngModel)]="cantidadHuespedes" name="cantidadHuespedes">
+        </div>
+        <div class="total-box">
+          <span>Total</span>
+          <h3>{{ total | currency:'COP':'symbol':'1.0-0' }}</h3>
+        </div>
+        <app-button text="Reservar"></app-button>
+      </form>
+    </div>
+  </section>
+  <!-- Organismo Secundario: Descripción y Datos -->
+  <section class="descripcion-box">
+    <p>{{ alojamiento.descripcion }}</p>
+    <div class="datos-detalle">
+      <div><strong>Dirección:</strong> {{ alojamiento.direccion }}</div>
+      <div><strong>Ciudad:</strong> {{ alojamiento.ciudad }}</div>
+      <div><strong>Departamento:</strong> {{ alojamiento.departamento }}</div>
+      <div><strong>Capacidad:</strong> {{ alojamiento.capacidad }}</div>
+    </div>
+  </section>
+  <!-- Organismo Secundario: Calificación, Precio y Anfitrión -->
+  <section class="info-adicional">
+    <div class="calificacion"><app-star-rating [calificacion]="alojamiento.calificacion"></app-star-rating></div>
+    <div class="precio"><strong>Precio:</strong> {{ alojamiento.precio | currency:'COP':'symbol' }} x Día</div>
+    <div class="anfitrion">
+      <app-avatar [src]="alojamiento.anfitrionImagen"></app-avatar>
+      <span>{{ alojamiento.anfitrion }}</span>
+    </div>
+  </section>
+</div>
 <app-footer></app-footer>
-

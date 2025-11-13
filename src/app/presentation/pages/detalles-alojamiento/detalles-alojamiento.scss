@@ -1,51 +1,200 @@
-@use '../../../../assets/styles/variables' as v;
-
-.main-container {
-   display: flex;
+.detalles-alojamiento {
+  max-width: 1100px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 32px 40px;
+  box-shadow: 0 2px 24px 0 rgba(50,50,93,.10);
+  border-radius: 16px;
+  display: flex;
   flex-direction: column;
+  gap: 32px;
+}
+
+.info-principal {
+  display: flex;
+  gap: 32px;
+  justify-content: space-between;
+}
+.imagen-alojamiento img {
+  width: 630px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px 0 rgba(50,50,93,.10);
+}
+.reserva-box {
+  background: #f4f7fa;
+  padding: 24px 24px 20px 24px;
+  border-radius: 12px;
+  min-width: 320px;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  box-shadow: 0 2px 8px 0 rgba(50,50,93,.08);
+}
+.reserva-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.campos-fechas, .campo-huespedes {
+  display: flex;
   align-items: center;
-  min-height: 82vh;
-  background-color: v.$color-secondary;
+  gap: 12px;
 }
-
-
-
-.img-container-accomodation {
-    width: 40%;
-    height: 300px;
-    overflow: hidden;
-    border-radius: 12px;
-    margin-bottom: 2rem;
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        background: v.$color-secondary;
-    }
+input[type="date"], input[type="number"] {
+  padding: 8px 10px;
+  border: 1px solid #c6c6c6;
+  border-radius: 6px;
+  font-size: 16px;
+  background: #fff;
+  width: 140px;
 }
-
-.details-accomodation-card {
-    background: v.$color-secondary;
-    border-radius: 16px;
-    box-shadow: 0 1px 20px 1px v.$color-shadow;
-    padding: 1rem;
-    width: 20%;
-    display: flex;
+.campo-huespedes input {
+  width: 80px;
+}
+.total-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.total-box span {
+  font-weight: 500;
+  color: #093b52;
+}
+.total-box h3 {
+  color: #204c7c;
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+.descripcion-box {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 18px 24px 10px 24px;
+  box-shadow: 0 1px 4px 0 rgba(50,50,93,.04);
+  margin-top: 8px;
+}
+.descripcion-box p {
+  color: #444;
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+.datos-detalle {
+  display: flex;
+  gap: 40px;
+  font-size: 1rem;
+  color: #555;
+  margin-top: 8px;
+}
+.info-adicional {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 18px 24px;
+  box-shadow: 0 1px 4px 0 rgba(50,50,93,.04);
+  margin-top: 8px;
+}
+.calificacion, .precio, .anfitrion {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1rem;
+}
+.calificacion {
+  min-width: 120px;
+}
+.precio {
+  min-width: 220px;
+  font-weight: 600;
+}
+.anfitrion span {
+  font-weight: 600;
+  color: #204c7c;
+  margin-left: 8px;
+}
+.detalles-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #e3e7ee;
+  padding-bottom: 12px;
+  margin-bottom: 18px;
+  gap: 16px;
+}
+.back-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #204c7c;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: color 0.2s;
+}
+.back-btn:hover {
+  color: #0a2a4d;
+}
+.titulo-alojamiento {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #204c7c;
+  margin: 0 16px 0 0;
+  flex: 1 1 auto;
+}
+.guardar-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.1rem;
+  color: #204c7c;
+  cursor: pointer;
+  user-select: none;
+}
+.icono-guardar {
+  font-size: 1.5rem;
+  color: #204c7c;
+  margin-left: 2px;
+  transition: color 0.2s;
+}
+.guardar-box:hover .icono-guardar {
+  color: #0a2a4d;
+}
+@media (max-width: 1100px) {
+  .detalles-alojamiento {
+    padding: 16px 4vw;
+  }
+  .info-principal {
     flex-direction: column;
-    gap: 1rem;
-
-    h2 {
-        font-family: v.$font-family-main;
-        color: v.$color-primary;
-        font-weight: 700;
-        font-size: 2rem;
-        margin: 0;
-    }
-
-    p {
-        font-family: v.$font-family-main;
-        color: v.$color-primary;
-        font-size: 1.1rem;
-        margin: 0;
-    }
+    align-items: center;
+  }
+  .imagen-alojamiento img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+  }
+  .reserva-box {
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+  }
+}
+@media (max-width: 700px) {
+  .detalles-alojamiento {
+    padding: 8px 0;
+    gap: 16px;
+  }
+  .info-principal {
+    gap: 16px;
+  }
+  .descripcion-box, .info-adicional {
+    padding: 10px 8px;
+    gap: 12px;
+  }
+  .datos-detalle {
+    flex-direction: column;
+    gap: 6px;
+  }
 }

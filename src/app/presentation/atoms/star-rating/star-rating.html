@@ -1,0 +1,7 @@
+<span class="stars">
+  <ng-container *ngFor="let star of stars(); let i = index">
+    <span [class.filled]="i < calificacion">&#9733;</span>
+  </ng-container>
+  <span class="rating-number">{{ calificacion }}</span>
+</span>
+
