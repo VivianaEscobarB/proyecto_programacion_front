@@ -6,6 +6,8 @@ import { FormFieldComponent } from '../../molecules/form-field/form-field';
 import { FormFieldSelectComponent } from '../../molecules/form-field-select/form-field-select';
 import { FormFieldDate} from '../../molecules/form-field-date/form-field-date';
 import { ButtonComponent } from '../../atoms/button/button';
+import { HeaderComponent } from '../header/header/header';
+import { FooterComponent } from '../footer/footer/footer';
 
 @Component({
   selector: 'app-registration-form',
@@ -16,7 +18,7 @@ import { ButtonComponent } from '../../atoms/button/button';
     FormFieldComponent,
     FormFieldSelectComponent,
     FormFieldDate,
-    ButtonComponent
+    ButtonComponent,
   ],
   templateUrl: './registration-form.html',
   styleUrls: ['./registration-form.scss']

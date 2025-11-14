@@ -9,12 +9,13 @@
   line-height: 1.5;
   text-align: center;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 9999px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   position: relative;
   overflow: hidden;
   font-family: inherit;
+  min-height: 40px;
   
   &:focus-visible {
     outline: 2px solid transparent;

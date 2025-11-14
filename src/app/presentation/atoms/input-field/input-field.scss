@@ -4,21 +4,21 @@
   padding: 0.5rem 0.75rem;
   font-size: 0.875rem;
   font-family: inherit;
-  color: #1F2937;
+  color: #333333;
   background-color: #FFFFFF;
-  border: 1px solid #D1D5DB;
-  border-radius: 0.375rem;
+  border: 1px solid #C0D0E0; /* Lighter, more subtle border */
+  border-radius: 4px; /* Slightly smaller border-radius */
   transition: all 0.2s ease-in-out;
   box-sizing: border-box;
   
   &::placeholder {
-    color: #9CA3AF;
+    color: #999999;
   }
   
   &:focus {
     outline: none;
-    border-color: #3B4C8B;
-    box-shadow: 0 0 0 3px rgba(59, 76, 139, 0.1);
+    border-color: #007bff; /* Blue focus border */
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25); /* Subtle blue shadow */
   }
   
   &:disabled {
@@ -28,10 +28,10 @@
   }
   
   &.input-error {
-    border-color: #EF4444;
+    border-color: #DC3545; /* Red border for errors */
     
     &:focus {
-      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+      box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25);
     }
   }
   
