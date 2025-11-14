@@ -52,5 +52,10 @@ export class AccommodationsPageComponent implements OnInit {
     });
   }
 
+  toDetallesAlojamiento(id: number) {
+    // Navegar a la página de detalles del alojamiento con el ID proporcionado
+    
+  }
+
   
 }
