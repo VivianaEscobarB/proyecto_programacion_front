@@ -1,3 +1,5 @@
+@use '../../../../assets/styles/variables' as v;
+
 .stars {
   color: #ffd700;
   font-size: 1.5rem;
@@ -12,7 +14,7 @@
   color: #ccc;
 }
 .rating-number {
-  color: #444;
+  color: v.$color-text-primary;
   font-size: 1.1rem;
   font-weight: 500;
   margin-left: 4px;

@@ -1,24 +1,9 @@
 @use '../../../../assets/styles/variables' as v;
-
-.main-content {
-  width: 90%;
-  margin: 3rem auto;
-  background-color: v.$color-secondary; ;
-
-  .banner-imagenes {
-    width: 100%;
-    overflow: hidden;
-    margin-bottom: 2.3rem;
-    img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-    }
-  }
-  .buscador {
+.buscador {
     margin: 2.3rem 0;
     display: flex;
     input {
+      
       flex: 1;
       border-radius: 1.5rem;
       border: 1.5px solid v.$color-primary;
@@ -42,17 +27,3 @@
       justify-content: center;
     }
   }
-  .items-lista {
-    display: flex;
-    gap: 1.1rem;
-    overflow-x: auto;
-    margin-bottom: 2.1rem;
-  }
-  h2 {
-    font-size: 1.09rem;
-    font-weight: 700;
-    color: v.$color-primary;
-    margin-bottom: 0.7rem;
-  }
-}
-

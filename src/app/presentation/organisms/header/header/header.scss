@@ -25,6 +25,7 @@
   }
 
   &__nav {
+    cursor: pointer;
     display: flex;
     gap: 2vw;
     .nav-link {
@@ -33,7 +34,7 @@
       font-weight: 500;
       font-size: 1rem;
       transition: color .2s;
-      &:hover { color: v.$color-primary; }
+      &:hover { color: v.$color-primary; font-weight: bolder; }
     }
   }
 
