@@ -5,7 +5,7 @@
   <nav class="header__nav">
     <a routerLink="/" class="nav-link" (click)="toMain()">Inicio</a>
     <a routerLink="/alojamientos" class="nav-link" (click)="toAccommodations()"  >Alojamientos</a>
-    <a routerLink="/nosotros" class="nav-link">Nosotros</a>
+    <a routerLink="/nosotros" class="nav-link" (click)="toAboutUs()">Nosotros</a>
   </nav>
 
   <div class="header__actions" *ngIf="!isLoggedIn; else userBlock">
@@ -15,7 +15,7 @@
 
   <ng-template #userBlock>
     <div class="header__user">
-      
+
       <span class="user-rol">{{ user.role }}</span>
       <button class="btn btn-outline" (click)="logout()">Cerrar sesión</button>
       <img (click)="toAccount()" [src]="user.imageUrl" class="user-img" alt="Foto perfil" *ngIf="user.imageUrl"/>

@@ -4,11 +4,9 @@ import { LoginPageComponent } from '../../presentation/pages/login-page/login-pa
 import { InicioPageComponent } from '../../presentation/pages/inicio/inicio';
 import { CuentaPageComponent } from '../../presentation/pages/cuenta/cuenta';
 import { DetallesAlojamientoPageComponent } from '../../presentation/pages/detalles-alojamiento/detalles-alojamiento';
-<<<<<<< HEAD
 import { NosotrosPageComponent } from '../../presentation/pages/nosotros/nosotros';
-=======
 import { AccommodationsPageComponent } from '../../presentation/pages/accommodations/accommodations';
->>>>>>> 722b16668982bd979d0ceb34f125536740bdf5ea
+import { NuevoAlojamientoComponent } from '../../presentation/pages/nuevo-alojamiento/nuevo-alojamiento';
 
 export const AppRoutes: Routes = [
   { path: 'inicio', component: InicioPageComponent },
@@ -18,6 +16,9 @@ export const AppRoutes: Routes = [
   { path: 'registro', component: RegisterPageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'nosotros', component: NosotrosPageComponent },
+  { path: 'nuevo-alojamiento',
+  component: NuevoAlojamientoComponent
+},
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // ruta por defecto
   { path: '**', redirectTo: '/login' } // rutas desconocidas
 ];
