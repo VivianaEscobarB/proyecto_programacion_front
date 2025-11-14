@@ -1,0 +1,26 @@
+<app-header></app-header>
+<div class="nosotros">
+  <section class="historia">
+    <h2>Nuestra Historia</h2>
+    <div class="contenido">
+      <p>{{ historia }}</p>
+      <img [src]="imagenHistoria" alt="Historia">
+    </div>
+  </section>
+  <section class="mision-vision">
+    <h2>Misión y Visión</h2>
+    <div class="contenido">
+      <div class="mision">
+        <h3>Misión</h3>
+        <p>{{ mision }}</p>
+      </div>
+      <div class="vision">
+        <h3>Visión</h3>
+        <p>{{ vision }}</p>
+      </div>
+      <img [src]="imagenMisionVision" alt="Misión y Visión">
+    </div>
+  </section>
+  <app-footer></app-footer>
+</div>
+
