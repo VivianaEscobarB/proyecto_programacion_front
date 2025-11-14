@@ -22,6 +22,10 @@ export class HeaderComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
+  toLogin() {
+    this.router.navigate(['/login']); // Redirige a la página de login
+  }
+
   ngOnInit() {
     this.isLoggedIn = this.authService.isLoggedIn();
     this.user = this.authService.getCurrentUser();
@@ -42,6 +46,14 @@ export class HeaderComponent {
 
   toMain() {
     this.router.navigate(['/inicio']); // Redirige a la página principal
+  }
+
+  toAccommodations() {
+    this.router.navigate(['/alojamientos']); // Redirige a la página de alojamientos
+  }
+
+  toAboutUs() {
+    this.router.navigate(['/nosotros']); // Redirige a la página de nosotros
   }
 
 

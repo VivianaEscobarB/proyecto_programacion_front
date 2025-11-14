@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { ReservaService } from '../../../core/services/reserva/reserva.service';
 import {ButtonComponent} from '../../atoms/button/button';
@@ -21,7 +22,7 @@ import { AvatarComponent } from '../../atoms/avatar/avatar';
     CurrencyPipe,
     FooterComponent,
     StarRatingComponent,
-    AvatarComponent
+    AvatarComponent, CommonModule
   ],
   styleUrls: ['./detalles-alojamiento.scss']
 })
@@ -60,5 +61,14 @@ export class DetallesAlojamientoPageComponent implements OnInit {
       next: () => alert('Reserva realizada correctamente'),
       error: (err: { error: { message: any; }; message: any; }) => alert('Error al reservar: ' + (err.error?.message || err.message))
     });
+  }
+
+
+  regresar() {
+    window.history.back();
+  }
+
+  agregarFavoritos() {
+    alert('Alojamiento agregado a favoritos');
   }
 }
