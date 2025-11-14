@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../../core/services/auth/auth';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   standalone: true,
   templateUrl: './header.html',
   styleUrls: ['./header.scss'],
-  imports: [CommonModule]
+  imports: [CommonModule, RouterModule]
 })
 export class HeaderComponent {
   isLoggedIn = false;
