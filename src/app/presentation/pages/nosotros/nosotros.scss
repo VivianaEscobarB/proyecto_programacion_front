@@ -1,0 +1,58 @@
+.nosotros {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+.historia, .mision-vision {
+  margin-bottom: 40px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.historia .contenido, .mision-vision .contenido {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.historia img, .mision-vision img {
+  width: 350px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.mision-vision .mision, .mision-vision .vision {
+  flex: 1;
+}
+
+.mision-vision h3 {
+  color: #093b52;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.mision-vision p {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.historia h2, .mision-vision h2 {
+  color: #093b52;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #093b52;
+  color: #fff;
+  font-size: 0.9rem;
+}

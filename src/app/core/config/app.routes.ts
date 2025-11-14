@@ -4,6 +4,7 @@ import { LoginPageComponent } from '../../presentation/pages/login-page/login-pa
 import { InicioPageComponent } from '../../presentation/pages/inicio/inicio';
 import { CuentaPageComponent } from '../../presentation/pages/cuenta/cuenta';
 import { DetallesAlojamientoPageComponent } from '../../presentation/pages/detalles-alojamiento/detalles-alojamiento';
+import { NosotrosPageComponent } from '../../presentation/pages/nosotros/nosotros';
 
 export const AppRoutes: Routes = [
   { path: 'inicio', component: InicioPageComponent },
@@ -11,6 +12,7 @@ export const AppRoutes: Routes = [
   { path: 'alojamiento/detalles', component: DetallesAlojamientoPageComponent},
   { path: 'registro', component: RegisterPageComponent },
   { path: 'login', component: LoginPageComponent },
+  { path: 'nosotros', component: NosotrosPageComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // ruta por defecto
   { path: '**', redirectTo: '/login' } // rutas desconocidas
 ];
