@@ -1,10 +1,10 @@
-<div class="card">
-  <img [src]="alojamiento.imagenUrl" [alt]="alojamiento.nombre" />
-  <div class="info">
-    <div class="nombre">{{ alojamiento.nombre }}</div>
-    <div class="precio">{{ alojamiento.precio }}</div>
+<div class="alojamiento-card" (click)="onCardClick()" role="button" tabindex="0" (keyup.enter)="onCardClick()">
+  <img [src]="alojamiento.imagenUrl" alt="Imagen de {{ alojamiento.nombre }}" loading="lazy" fallbackSrc />
+  <div class="alojamiento-info">
+    <h4>{{ alojamiento.nombre }}</h4>
+    <p class="precio">COP {{ alojamiento.precio | number:'1.0-0' }}</p>
     <div class="estrellas">
-      <span *ngFor="let star of [].constructor(alojamiento.estrellas)">★</span>
+      <span *ngFor="let _ of [].constructor(alojamiento.estrellas)">★</span>
     </div>
   </div>
 </div>

@@ -38,21 +38,32 @@
   flex-direction: column;
   gap: 18px;
 }
-.campos-fechas, .campo-huespedes {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+/* Nuevo: grid para fechas, evita overflow horizontal */
+.campos-fechas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 12px;
+  row-gap: 6px;
+  align-items: start;
 }
+/* Inputs a 100% dentro del formulario */
+.reserva-box input[type="date"],
+.reserva-box input[type="number"] {
+  box-sizing: border-box;
+  width: 100%;
+}
+/* Quitar ancho fijo por defecto */
 input[type="date"], input[type="number"] {
   padding: 8px 10px;
   border: 1px solid #c6c6c6;
   border-radius: 6px;
   font-size: 16px;
   background: #fff;
-  width: 140px;
+  /* width: 140px;  eliminado para evitar overflow */
 }
+/* Huéspedes mantiene un ancho cómodo, pero responsivo */
 .campo-huespedes input {
-  width: 80px;
+  max-width: 120px;
 }
 .total-box {
   display: flex;
@@ -151,7 +162,6 @@ input[type="date"], input[type="number"] {
   gap: 6px;
   font-size: 1.1rem;
   color: #204c7c;
-  cursor: pointer;
   user-select: none;
 }
 .icono-guardar {
@@ -189,6 +199,10 @@ input[type="date"], input[type="number"] {
   }
   .info-principal {
     gap: 16px;
+  }
+  /* En móvil, fechas a una columna */
+  .campos-fechas {
+    grid-template-columns: 1fr;
   }
   .descripcion-box, .info-adicional {
     padding: 10px 8px;

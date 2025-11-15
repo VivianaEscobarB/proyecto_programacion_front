@@ -17,10 +17,9 @@
     <div class="header__user">
 
       <span class="user-rol">{{ user.role }}</span>
+      <button *ngIf="user.role==='ANFITRION'" class="btn btn-outline" (click)="toHostAccount()">Panel Anfitrión</button>
       <button class="btn btn-outline" (click)="logout()">Cerrar sesión</button>
-      <img (click)="toAccount()" [src]="user.imageUrl" class="user-img" alt="Foto perfil" *ngIf="user.imageUrl"/>
+      <img (click)="toAccount()" [src]="user.imageUrl" class="user-img" alt="Foto perfil" *ngIf="user.imageUrl" fallbackSrc/>
     </div>
   </ng-template>
 </header>
-
-

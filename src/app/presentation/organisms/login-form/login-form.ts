@@ -40,34 +40,25 @@ export class LoginFormComponent {
   }
 
   submitForm(): void {
-  if (this.loginForm.invalid) {
-    this.loginForm.markAllAsTouched();
-    return;
-  }
-  this.isSubmitting = true;
-  this.error = null;
-  this.authService.login(this.loginForm.value).subscribe({
-    next: (response) => {
-    localStorage.setItem('token', response.token);
-    localStorage.setItem('userId', response.userId);
-    localStorage.setItem('userEmail', response.email);
-    localStorage.setItem('userRole', response.roles[0]);
-    localStorage.setItem('userImage', response.urlAccountPhoto.replace('/view', '/preview')); // Ajuste Google Drive
-    // Navegar a inicio, o lo que desees
-
-    
-      console.log('Respuesta de la API:', response); // Aquí se muestra en la consola
-      this.isSubmitting = false;
-      // Redirecciona o realiza alguna acción adicional si quieres
-      this.router.navigate(['/inicio']); // Redirige al dashboard
-    },
-    error: (err) => {
-      console.log('Error en la API:', err);  // También en consola
-      this.error = err.error?.message ?? 'Error de autenticación';
-      this.isSubmitting = false;
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
     }
-  });
-}
+    this.isSubmitting = true;
+    this.error = null;
+    this.authService.login(this.loginForm.value).subscribe({
+      next: () => {
+        // AuthService ya persistió datos y actualizó BehaviorSubject
+        this.isSubmitting = false;
+        this.router.navigate(['/inicio']);
+      },
+      error: (err) => {
+        const msg = err?.error?.message || err?.error?.error || err?.message || 'Error de autenticación';
+        this.error = msg;
+        this.isSubmitting = false;
+      }
+    });
+  }
 
 
   goToRegistro(): void {

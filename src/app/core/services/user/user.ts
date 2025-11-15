@@ -8,14 +8,29 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  // Nuevo método para obtener perfil por ID
-   getProfileById(userId: string): Observable<any> {
+  private authHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    if (token) headers = headers.set('Authorization', `Bearer ${token}`);
+    return headers;
+  }
 
-    // Ajusta el endpoint para usar ID, ejemplo: /api/usuarios/{id}
-    return this.http.get(`${this.apiUrl}/${userId}`, { headers });
+  // Nuevo método para obtener perfil por ID
+  getProfileById(userId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${userId}`, { headers: this.authHeaders() });
+  }
+
+  updatePhoto(userId: string, urlAccountPhoto: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${userId}/photo`, { urlAccountPhoto }, { headers: this.authHeaders() });
+  }
+
+  uploadPhotoFile(userId: string, file: File) {
+    const form = new FormData();
+    form.append('file', file);
+    return this.http.post(`${this.apiUrl}/${userId}/photo/upload`, form, { headers: this.authHeaders().delete('Content-Type') });
+  }
+
+  updateProfile(userId: string, data: { phoneNumber?: string; homeAddress?: string; dayOfBirth?: string }): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${userId}`, data, { headers: this.authHeaders() });
   }
 }

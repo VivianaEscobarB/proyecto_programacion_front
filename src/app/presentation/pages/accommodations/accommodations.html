@@ -4,7 +4,15 @@
     <app-search-bar ></app-search-bar>
   </section>
   <section class="grid-alojamientos">
-    <app-alojamiento-card *ngFor="let aloj of alojamientos" [alojamiento]="aloj"></app-alojamiento-card>
+    <ng-container *ngIf="loading">Cargando alojamientos...</ng-container>
+    <ng-container *ngIf="!loading && error">{{ error }}</ng-container>
+    <ng-container *ngIf="!loading && !error && alojamientos.length === 0">No hay alojamientos para mostrar.</ng-container>
+    <app-alojamiento-card *ngFor="let aloj of alojamientos" [alojamiento]="aloj" (clickAlojamiento)="navigateToDetails(aloj.id)"></app-alojamiento-card>
+  </section>
+  <section class="paginacion" *ngIf="total > pageSize">
+    <button (click)="prevPage()" [disabled]="page === 0">Anterior</button>
+    <span>Página {{ page + 1 }} / {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="page + 1 >= totalPages">Siguiente</button>
   </section>
 </main>
 <app-footer></app-footer>

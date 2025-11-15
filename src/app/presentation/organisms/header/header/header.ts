@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../../../core/services/auth/auth';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
+import { ImgFallbackDirective } from '../../../atoms/img-fallback/img-fallback.directive';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { Router, RouterModule } from '@angular/router';
   standalone: true,
   templateUrl: './header.html',
   styleUrls: ['./header.scss'],
-  imports: [CommonModule, RouterModule]
+  imports: [CommonModule, RouterModule, ImgFallbackDirective]
 })
 export class HeaderComponent {
   isLoggedIn = false;
@@ -29,10 +30,7 @@ export class HeaderComponent {
   ngOnInit() {
     this.isLoggedIn = this.authService.isLoggedIn();
     this.user = this.authService.getCurrentUser();
-    this.user.imageUrl = this.user.imageUrl ? this.user.imageUrl : 'assets/images/user_image_default.png';
-    this.user.role = this.user.role ? this.user.role : 'Usuario';
-    this.user.email = this.user.email ? this.user.email : '';
-    this.user.userId = this.user.userId ? this.user.userId : '';
+    this.authService.user$.subscribe(u => { this.user = u; });
   }
 
   logout() {
@@ -54,6 +52,10 @@ export class HeaderComponent {
 
   toAboutUs() {
     this.router.navigate(['/nosotros']); // Redirige a la página de nosotros
+  }
+
+  toHostAccount() {
+    this.router.navigate(['/cuenta/anfitrion']);
   }
 
 

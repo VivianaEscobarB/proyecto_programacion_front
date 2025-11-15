@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 import { ReservaService } from '../../../core/services/reserva/reserva.service';
 import {ButtonComponent} from '../../atoms/button/button';
@@ -10,6 +11,10 @@ import {CurrencyPipe} from '@angular/common';
 import {FooterComponent} from '../../organisms/footer/footer/footer';
 import { StarRatingComponent } from '../../atoms/star-rating/star-rating';
 import { AvatarComponent } from '../../atoms/avatar/avatar';
+import { AccommodationService } from '../../../core/services/accommodation/accommodation';
+import { FavoriteService } from '../../../core/services/accommodation/favorite.service';
+import { ImgFallbackDirective } from '../../atoms/img-fallback/img-fallback.directive';
+import { resolveAccommodationImage } from '../../../domain/entities/accommodation-images';
 
 @Component({
   selector: 'app-detalles-alojamientos',
@@ -22,7 +27,9 @@ import { AvatarComponent } from '../../atoms/avatar/avatar';
     CurrencyPipe,
     FooterComponent,
     StarRatingComponent,
-    AvatarComponent, CommonModule
+    AvatarComponent,
+    CommonModule,
+    ImgFallbackDirective
   ],
   styleUrls: ['./detalles-alojamiento.scss']
 })
@@ -31,35 +38,138 @@ export class DetallesAlojamientoPageComponent implements OnInit {
   fechaSalida: string = '';
   cantidadHuespedes: number = 4;
   total: number = 4500000;
-  alojamiento: any = {
-    descripcion: "Esta finca ofrece una espectacular piscina al aire libre rodeada de cafetales, perfecta para relajarse y disfrutar de la naturaleza en un entorno tranquilo. Con impresionantes paisajes montañosos, amplias zonas verdes y cómodas áreas de descanso, es el lugar ideal para desconectarse, descansar y deleitarse con la belleza del campo.",
-    direccion: "Vereda El Caimo",
-    ciudad: "Armenia",
-    departamento: "Quindío",
-    capacidad: "8 habitaciones individuales",
-    calificacion: 4,
-    precio: 450000,
-    anfitrion: "Jhoan Sebastian Urrea Sanchez",
-    anfitrionImagen: "assets/images/avatar/avatar.png",
-    imagen: "assets/images/deptos/finca_robles.png"
-  };
+  alojamiento: any;
+  noches: number = 1;
+  favorito = false;
+  reservando = false;
+  errorReserva: string | null = null;
+  capacidadMax: number | null = null;
 
-  constructor(private reservaService: ReservaService) {}
+  constructor(private reservaService: ReservaService, private route: ActivatedRoute, private accommodationService: AccommodationService, private favoriteService: FavoriteService) {}
 
   ngOnInit(): void {
-    // Puedes cargar datos adicionales aquí si se obtienen desde un API
+    const nav = (window as any).history.state;
+    if (nav && nav.alojamiento) {
+      this.alojamiento = nav.alojamiento;
+      this.alojamiento.imagenUrl = resolveAccommodationImage(this.alojamiento.id, this.alojamiento.imagenUrl);
+      this.updateCapacidadMaxFromAlojamiento();
+      this.calcularTotal();
+    }
+    this.route.data.subscribe(data => {
+      if (data['alojamiento']) {
+        const dto = data['alojamiento'];
+        dto.imagenUrl = resolveAccommodationImage(dto.id, dto.imagenUrl);
+        this.alojamiento = { ...dto, imagenUrl: resolveAccommodationImage(dto.id, dto.imagenUrl) };
+        this.updateCapacidadMaxFromAlojamiento();
+        this.calcularTotal();
+      } else if (!this.alojamiento) {
+        const idParam = this.route.snapshot.paramMap.get('id');
+        const id = idParam ? parseInt(idParam, 10) : null;
+        if (id !== null) {
+          this.accommodationService.getAlojamientoById(id).subscribe(a => {
+            a.imagenUrl = resolveAccommodationImage(a.id, a.imagenUrl);
+            this.alojamiento = a;
+            this.updateCapacidadMaxFromAlojamiento();
+            this.calcularTotal();
+          });
+        }
+      }
+    });
+    // Después de resolver alojamiento, verificar favorito
+    setTimeout(() => {
+      if (this.alojamiento?.id) {
+        this.favoriteService.isFavorite(this.alojamiento.id).subscribe({
+          next: (isFav) => this.favorito = isFav,
+          error: () => this.favorito = false
+        });
+      }
+    }, 0);
+  }
+
+  onFechasChange() {
+    // Recalcular noches sólo cuando ambas fechas estén presentes
+    if (!this.fechaLlegada || !this.fechaSalida) {
+      this.noches = 1;
+      this.calcularTotal();
+      return;
+    }
+    const inDate = this.parseYMD(this.fechaLlegada);
+    const outDate = this.parseYMD(this.fechaSalida);
+    const diffMs = outDate.getTime() - inDate.getTime();
+    const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    this.noches = isFinite(days) && days > 0 ? days : 1;
+    this.calcularTotal();
+  }
+
+  cambiarImagenPrincipal(url: string) {
+    if (this.alojamiento) {
+      this.alojamiento.imagenUrl = url;
+    }
+  }
+
+  calcularTotal() {
+    const precio = Number(this.alojamiento?.precio) || 0;
+    const noches = Number(this.noches) || 1;
+    // Política: precio por noche, independiente de huéspedes. Si se requiere por persona, multiplicar por this.cantidadHuespedes
+    this.total = Math.max(0, precio * Math.max(1, noches));
+  }
+
+  onHuespedesChange() {
+    // Asegurar entero mínimo 1 y no superar capacidad del alojamiento
+    let val = Math.max(1, Math.trunc(Number(this.cantidadHuespedes) || 1));
+    if (this.capacidadMax !== null) {
+      val = Math.min(val, this.capacidadMax);
+    }
+    this.cantidadHuespedes = val;
+    this.calcularTotal();
+  }
+
+  // Utilidad: parsear 'yyyy-mm-dd' sin efectos de zona horaria/DST
+  private parseYMD(value: string): Date {
+    const [y, m, d] = value.split('-').map(v => parseInt(v, 10));
+    return new Date(y, (m || 1) - 1, d || 1);
+  }
+
+  private datosReservaValidos(): boolean {
+    if (!this.alojamiento?.id) return false;
+    if (!this.fechaLlegada || !this.fechaSalida) return false;
+    if (!this.cantidadHuespedes || this.cantidadHuespedes < 1) return false;
+    const inDate = this.parseYMD(this.fechaLlegada);
+    const outDate = this.parseYMD(this.fechaSalida);
+    if (!(outDate.getTime() > inDate.getTime())) return false;
+    // capacidad
+    if (this.capacidadMax !== null && this.cantidadHuespedes > this.capacidadMax) return false;
+    return true;
   }
 
   reservar() {
+    this.errorReserva = null;
+    if (!localStorage.getItem('token')) {
+      alert('Debes iniciar sesión para reservar');
+      return;
+    }
+    if (!this.datosReservaValidos()) {
+      alert('Completa fechas válidas y número de huéspedes');
+      return;
+    }
     const reserva = {
-      accommodationId: 1, // Cambia esto por el ID real del alojamiento si lo tienes
-      checkIn: this.fechaLlegada,   // formato 'YYYY-MM-DD'
-      checkOut: this.fechaSalida,   // formato 'YYYY-MM-DD'
+      accommodationId: this.alojamiento.id,
+      checkIn: this.fechaLlegada,
+      checkOut: this.fechaSalida,
       countRoommates: this.cantidadHuespedes
     };
+    this.reservando = true;
     this.reservaService.crearReserva(reserva).subscribe({
-      next: () => alert('Reserva realizada correctamente'),
-      error: (err: { error: { message: any; }; message: any; }) => alert('Error al reservar: ' + (err.error?.message || err.message))
+      next: () => {
+        this.reservando = false;
+        alert('Reserva creada con éxito');
+      },
+      error: (err) => {
+        this.reservando = false;
+        const msg = err?.error?.message || err?.error?.error || err?.message || 'Error al reservar';
+        this.errorReserva = msg;
+        alert('No se pudo reservar: ' + msg);
+      }
     });
   }
 
@@ -69,6 +179,24 @@ export class DetallesAlojamientoPageComponent implements OnInit {
   }
 
   agregarFavoritos() {
-    alert('Alojamiento agregado a favoritos');
+    if (!this.alojamiento?.id || this.favorito) return;
+    this.favoriteService.addFavorite(this.alojamiento.id).subscribe({
+      next: () => {
+        this.favorito = true;
+        alert('Añadido a favoritos');
+      },
+      error: err => alert('Error al guardar favorito: ' + (err.error?.message || err.message))
+    });
+  }
+
+  private updateCapacidadMaxFromAlojamiento() {
+    const raw = this.alojamiento?.capacidad;
+    const cap = typeof raw === 'number' ? raw : parseInt(raw, 10);
+    this.capacidadMax = Number.isFinite(cap) && cap > 0 ? cap : null;
+    // Clamp el valor actual
+    this.cantidadHuespedes = Math.max(1, Math.trunc(Number(this.cantidadHuespedes) || 1));
+    if (this.capacidadMax !== null) {
+      this.cantidadHuespedes = Math.min(this.cantidadHuespedes, this.capacidadMax);
+    }
   }
 }

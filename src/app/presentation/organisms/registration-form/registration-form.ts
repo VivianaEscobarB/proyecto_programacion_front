@@ -6,8 +6,8 @@ import { FormFieldComponent } from '../../molecules/form-field/form-field';
 import { FormFieldSelectComponent } from '../../molecules/form-field-select/form-field-select';
 import { FormFieldDate} from '../../molecules/form-field-date/form-field-date';
 import { ButtonComponent } from '../../atoms/button/button';
-import { HeaderComponent } from '../header/header/header';
-import { FooterComponent } from '../footer/footer/footer';
+import { AuthService } from '../../../core/services/auth/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration-form',
@@ -47,7 +47,7 @@ export class RegistrationFormComponent implements OnInit {
     { value: 'bogota', label: 'Bogotá' }
   ];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.registrationForm = this.fb.group({
@@ -93,9 +93,51 @@ export class RegistrationFormComponent implements OnInit {
       return;
     }
     this.isSubmitting = true;
-    setTimeout(() => {
-      alert('Registro exitoso!');
-      this.isSubmitting = false;
-    }, 1500);
+    const form = this.registrationForm.value;
+    // Construir payload según RegisterUserCommand
+    const payload = {
+      firstName: form.nombres,
+      lastName: form.apellidos,
+      email: form.email,
+      password: form.password,
+      phoneNumber: form.telefono,
+      identification: form.identificacion,
+      dateOfBirth: form.fechaNacimiento,
+      nationality: form.nacionalidad,
+      country: form.pais,
+      department: form.departamento,
+      city: form.ciudad,
+      address: form.direccion,
+      roles: ['CLIENTE']
+    };
+    this.authService.register(payload).subscribe({
+      next: () => {
+        alert('Registro exitoso!');
+        // Login automático
+        this.authService.login({ email: payload.email, password: payload.password }).subscribe({
+          next: (response) => {
+            localStorage.setItem('token', response.token);
+            localStorage.setItem('userId', response.userId);
+            localStorage.setItem('userEmail', response.email);
+            localStorage.setItem('userRole', response.roles?.[0] || 'CLIENTE');
+            const url = response.urlAccountPhoto ? response.urlAccountPhoto.replace('/view', '/preview') : '/assets/images/user_image_default.png';
+            localStorage.setItem('userImage', url);
+            this.authService.setUserImage(url);
+            this.isSubmitting = false;
+            this.router.navigate(['/inicio']);
+          },
+          error: (err) => {
+            console.error('Login post-registro falló', err);
+            this.isSubmitting = false;
+            this.router.navigate(['/login']);
+          }
+        });
+      },
+      error: (err) => {
+        console.error('Error en registro', err);
+        alert(err.error?.error || err.error?.message || 'Error en el registro');
+        this.isSubmitting = false;
+      }
+    });
   }
 }

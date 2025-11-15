@@ -7,12 +7,15 @@ import { DetallesAlojamientoPageComponent } from '../../presentation/pages/detal
 import { NosotrosPageComponent } from '../../presentation/pages/nosotros/nosotros';
 import { AccommodationsPageComponent } from '../../presentation/pages/accommodations/accommodations';
 import { NuevoAlojamientoComponent } from '../../presentation/pages/nuevo-alojamiento/nuevo-alojamiento';
+import { DetalleAlojamientoResolver } from '../services/accommodation/detalle-alojamiento.resolver';
+import { CuentaAnfitrionPageComponent } from '../../presentation/pages/cuenta/cuenta-anfitrion';
 
 export const AppRoutes: Routes = [
   { path: 'inicio', component: InicioPageComponent },
   { path: 'cuenta', component: CuentaPageComponent },
+  { path: 'cuenta/anfitrion', component: CuentaAnfitrionPageComponent },
   { path: 'alojamientos', component: AccommodationsPageComponent },
-  { path: 'alojamiento/detalles', component: DetallesAlojamientoPageComponent},
+  { path: 'alojamiento/detalles/:id', component: DetallesAlojamientoPageComponent, resolve: { alojamiento: DetalleAlojamientoResolver } },
   { path: 'registro', component: RegisterPageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'nosotros', component: NosotrosPageComponent },
