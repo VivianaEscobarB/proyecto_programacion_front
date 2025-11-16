@@ -29,9 +29,9 @@
     </div>
   </section>
 
-  <section class="profile-details-card" style="width: 92%;">
+  <section class="profile-details-card" >
     <h3>Historial de reservas</h3>
-    <div class="toolbar" style="display:flex; gap:1rem; align-items:center; margin-bottom:.75rem;">
+    <div class="toolbar">
       <label>Estado:
         <select (change)="cambiarFiltroEstado($any($event.target).value)">
           <option value="">Todos</option>
@@ -43,7 +43,7 @@
           <option>Finalizada</option>
         </select>
       </label>
-      <div style="margin-left:auto; display:flex; gap:.5rem;">
+      <div class="pagination-controls">
         <button (click)="anterior()" [disabled]="page===0">◀</button>
         <span>Página {{ page + 1 }}</span>
         <button (click)="siguiente()" [disabled]="reservas.length < size">▶</button>
@@ -51,9 +51,9 @@
     </div>
     <div *ngIf="mensaje" style="background:#e0f4ff; padding:.5rem .75rem; border-radius:6px; margin-bottom:.5rem; color:#03415e; font-size:.85rem;">{{ mensaje }}</div>
     <div *ngIf="cargando">Cargando...</div>
-    <table *ngIf="!cargando" style="width:100%; border-collapse: collapse;">
+    <table *ngIf="!cargando" class="table-reservations">
       <thead>
-        <tr style="text-align:left;">
+        <tr style="text-align:center;">
           <th>Alojamiento</th>
           <th>Ciudad</th>
           <th>Cliente</th>
@@ -68,7 +68,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let r of reservas" style="border-top: 1px solid #eee;">
+        <tr *ngFor="let r of reservas" class="reservation-row">
           <td>{{ r.accommodationTitle || ('#'+r.accommodationId) }}</td>
           <td>{{ r.cityName || '—' }}</td>
           <td>
