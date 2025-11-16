@@ -52,7 +52,7 @@ export class InicioPageComponent implements OnInit {
   }
 
   private loadFeatured() {
-    this.accommodationService.getDestacados(2).subscribe({
+    this.accommodationService.getDestacados(4).subscribe({
       next: (list) => {
         this.alojamientos = list;
         this.loadingFeatured = false;

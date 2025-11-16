@@ -43,10 +43,15 @@
     }
   }
   .items-lista {
+    width: 100%;
     display: flex;
-    gap: 1.1rem;
-    overflow-x: auto;
+    gap: 2rem;
     margin-bottom: 2.1rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    scrollbar-width: none;
+    scrollbar-color:  transparent;
+    
   }
   h2 {
     font-size: 1.09rem;
