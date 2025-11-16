@@ -1,0 +1,105 @@
+@use '../../../../../assets/styles/variables' as v;
+
+.header {
+  font-family: v.$font-family-main;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 76px;
+  padding: 0 3vw;
+  background: v.$color-secondary;
+  border-bottom: 1px solid #e4eaf3;
+
+  &__logo {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    img { height: 38px; }
+    span {
+      
+      font-weight: 700;
+      color: v.$color-primary;
+      font-size: 1.2rem;
+    }
+  }
+
+  &__nav {
+    cursor: pointer;
+    display: flex;
+    gap: 2vw;
+    .nav-link {
+      text-decoration: none;
+      color: v.$color-primary;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color .2s;
+      &:hover { color: v.$color-primary; font-weight: bolder; }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 1vw;
+    .btn {
+      padding: .5em 1.5em;
+      border-radius: 2em;
+      border: 1px solid v.$color-primary;
+      background: none;
+      color: v.$color-primary;
+      font-weight: 600;
+      cursor: pointer;
+      &.btn-primary {
+        background: v.$color-primary;
+        color: v.$color-secondary;
+        border: none;
+      }
+    }
+  }
+
+  // Bloque para usuario autenticado
+  &__user {
+    font-family: v.$font-family-main;
+  
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+
+    .user-img {
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid v.$color-primary;
+    }
+    .user-rol {
+
+      
+      font-size: 0.8rem;
+      padding: .5em 1.5em;
+      border-radius: 2em;
+      border: 1px solid v.$color-primary;
+      background: none;
+      color: v.$color-primary;
+      font-weight: 500;
+      cursor: pointer;
+      
+    }
+    .btn {
+      // Aprovecha los estilos de .header__actions .btn
+      padding: .5em 1.5em;
+      border-radius: 2em;
+      border: 1px solid v.$color-primary;
+      background: none;
+      color: v.$color-primary;
+      font-weight: 600;
+      cursor: pointer;
+      &.btn-primary {
+        background: v.$color-primary;
+        color: v.$color-secondary;
+        border: none;
+      }
+    }
+  }
+}

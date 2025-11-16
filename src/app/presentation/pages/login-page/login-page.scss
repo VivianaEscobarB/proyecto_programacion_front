@@ -1,0 +1,46 @@
+@use '../../../../assets/styles/variables' as v;
+
+.login-page {
+  min-width: 1342px;
+  background: v.$color-secondary;
+  align-items: center;
+  display: block;
+  justify-content: center;
+  
+  overflow: hidden; // Esconde bordes de la llave si se sale
+}
+
+.login-main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  position: relative;
+ 
+}
+
+.llave-bg {
+  position: absolute;
+  width: 90%; 
+  height: 90%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+ 
+
+  .svg-bg {
+    height: 100%;
+    width: 100%; 
+    display: block;
+  }
+}
+.app-login-form {
+  position: relative;
+
+  border-radius: 18px;
+  margin: 2rem 2rem;
+  
+  margin-left: 34vw; // Ajusta para centrar respecto al fondo
+}

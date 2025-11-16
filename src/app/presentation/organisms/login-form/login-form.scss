@@ -1,0 +1,65 @@
+@use '../../../../assets/styles/variables' as v;
+
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  
+  font-family: v.$font-family-main;
+}
+
+.login-card {
+  
+  max-width: 680px;
+  background-color: v.$color-secondary;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  padding: 3rem 3rem;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  .login-title {
+    font-family: v.$font-family-main;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: v.$color-primary;
+  }
+  .login-subtitle {
+    color: #6B7280;
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-actions {
+  margin-top: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.register-link {
+  margin-top: 1rem;
+  text-align: center;
+  color: #6B7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 1.25rem 0.5rem;
+  }
+}

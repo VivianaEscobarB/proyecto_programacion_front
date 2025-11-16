@@ -1,0 +1,13 @@
+<div class="form-field">
+  <app-label [text]="label" [required]="required"></app-label>
+  <app-input-field
+    [type]="type"
+    [placeholder]="placeholder"
+    [formControl]="control"
+    [hasError]="hasError"
+  ></app-input-field>
+
+  <div class="form-error" *ngIf="hasError">
+    {{ errorMessage }}
+  </div>
+</div>

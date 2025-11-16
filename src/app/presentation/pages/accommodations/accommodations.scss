@@ -1,0 +1,62 @@
+@use '../../../../assets/styles/variables' as v;
+
+.main-alojamientos {
+  background-color: v.$color-secondary;
+
+  width: 100%;
+
+ .search-bar {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+
+    app-search-bar {
+      width: 50%;
+    }
+
+
+  }
+
+  .grid-alojamientos {
+    width: 92%;
+    max-width: 1400px;
+    min-height: 54vh;
+    margin: 24px auto 60px;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.4rem;
+
+    // Mensajes
+    ng-container {
+      font-size: .95rem;
+      color: #2c3468;
+    }
+
+    // El componente ya trae su estilo; eliminamos estilos anteriores.
+    .alojamiento-card {
+      // hereda estilos propios
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .main-alojamientos {
+    .grid-alojamientos {
+      gap: 1rem;
+      margin: 16px auto 40px;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+  }
+}
+
+@media (max-width: 520px) {
+  .main-alojamientos {
+    .grid-alojamientos {
+      width: 96%;
+      gap: .85rem;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    }
+  }
+}

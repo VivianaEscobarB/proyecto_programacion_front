@@ -1,0 +1,79 @@
+.registration-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 120px); /* Adjust based on header/footer height */
+  background-color: #f0f2f5;
+}
+
+.registration-card {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px 0;
+}
+
+.registration-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.registration-title {
+  font-size: 2.5em;
+  color: #333333;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.registration-subtitle {
+  font-size: 1.1em;
+  color: #666666;
+}
+
+.registration-form {
+  .form-columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px 40px;
+    margin-bottom: 30px;
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-field-placeholder {
+      /* To align with the "Dirección" field in the first column */
+      height: 78px; /* Approximate height of an app-form-field */
+    }
+  }
+
+  .form-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+
+    
+    
+
+    .login-link {
+      font-size: 1em;
+      color: #555555;
+
+      a {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 500;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

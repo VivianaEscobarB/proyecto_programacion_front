@@ -1,0 +1,241 @@
+@use '../../../../assets/styles/variables' as v;
+
+.detalles-alojamiento {
+  max-width: 1100px;
+  margin: 40px auto;
+  background: v.$color-secondary;
+  padding: 32px 40px;
+  box-shadow: 0 2px 24px 0 rgba(50,50,93,.10);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.info-principal {
+  display: flex;
+  gap: 32px;
+  justify-content: space-between;
+}
+.imagen-alojamiento img {
+  width: 630px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px 0 v.$color-shadow; ;
+}
+.reserva-box {
+  background: v.$color-secondary;
+  padding: 24px 24px 20px 24px;
+  border-radius: 12px;
+  min-width: 320px;
+  max-width: 340px;
+  display: flex;
+  
+  flex-direction: column;
+  gap: 18px;
+  box-shadow: 0 2px 8px 0 v.$color-shadow; ;
+}
+.reserva-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+}
+/* Nuevo: grid para fechas, evita overflow horizontal */
+.campos-fechas, .campo-huespedes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 5px;
+  row-gap: 10px;
+  align-items: start;
+}
+/* Inputs a 100% dentro del formulario */
+.reserva-box input[type="date"],
+.reserva-box input[type="number"] {
+  box-sizing: border-box;
+  width: 100%;
+  
+}
+/* Quitar ancho fijo por defecto */
+input[type="date"], input[type="number"] {
+  opacity: 0.7;
+  padding: 8px 10px;
+  border: 1px solid v.$color-text-secondary;
+  border-radius: 6px;
+  font-size: 16px;
+  background: v.$color-secondary;
+  /* width: 140px;  eliminado para evitar overflow */
+}
+/* Huéspedes mantiene un ancho cómodo, pero responsivo */
+
+.total-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  
+  border-top: 2px solid #e3e7ee;
+  padding-top: 12px;
+
+}
+
+.fav-btn {
+  
+  color: v.$color-primary;
+  border: 1px solid v.$color-primary;
+  border-radius: 24px;
+  padding: 10px 18px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px 0 rgba(50,50,93,.10);
+  font-size: 1rem;
+}
+
+
+.total-box span {
+  font-weight: 500;
+  color: #093b52;
+}
+.total-box h3 {
+  color: #204c7c;
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  
+}
+
+
+
+.descripcion-box {
+  background: v.$color-secondary;
+  border-radius: 12px;
+  padding: 18px 24px 10px 24px;
+  box-shadow: 0 1px 4px 0 v.$color-shadow;
+  margin: 6px 0;
+}
+.descripcion-box p {
+  color: #444;
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+.datos-detalle {
+  display: flex;
+  gap: 40px;
+  font-size: 1rem;
+  color: #555;
+  margin: 18px 0;
+}
+.info-adicional {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  background: v.$color-secondary;
+  border-radius: 12px;
+  padding: 18px 24px;
+  box-shadow: 0 1px 4px 0 v.$color-shadow;
+  margin-top: 2px;
+}
+.calificacion, .precio, .anfitrion {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1rem;
+}
+.calificacion {
+  min-width: 120px;
+}
+.precio {
+  min-width: 220px;
+  font-weight: 600;
+}
+.anfitrion span {
+  font-weight: 600;
+  color: #204c7c;
+  margin-left: 8px;
+}
+.detalles-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #e3e7ee;
+  padding-bottom: 12px;
+  margin-bottom: 18px;
+  gap: 16px;
+}
+.back-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #204c7c;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: color 0.2s;
+}
+.back-btn:hover {
+  color: #0a2a4d;
+}
+.titulo-alojamiento {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #204c7c;
+  margin: 0 16px 0 0;
+  flex: 1 1 auto;
+}
+.guardar-box {
+    cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.1rem;
+  color: #204c7c;
+  user-select: none;
+}
+.icono-guardar {
+  font-size: 1.5rem;
+  color: #204c7c;
+  margin-left: 2px;
+  transition: color 0.2s;
+}
+.guardar-box:hover .icono-guardar {
+  color: #0a2a4d;
+}
+@media (max-width: 1100px) {
+  .detalles-alojamiento {
+    padding: 16px 4vw;
+  }
+  .info-principal {
+    flex-direction: column;
+    align-items: center;
+  }
+  .imagen-alojamiento img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+  }
+  .reserva-box {
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+  }
+}
+@media (max-width: 700px) {
+  .detalles-alojamiento {
+    padding: 8px 0;
+    gap: 16px;
+  }
+  .info-principal {
+    gap: 16px;
+  }
+  /* En móvil, fechas a una columna */
+  .campos-fechas {
+    grid-template-columns: 1fr;
+  }
+  .descripcion-box, .info-adicional {
+    padding: 10px 8px;
+    gap: 12px;
+  }
+  .datos-detalle {
+    flex-direction: column;
+    gap: 6px;
+  }
+}

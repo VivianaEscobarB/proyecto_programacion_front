@@ -1,0 +1,61 @@
+<app-header></app-header>
+<div class="detalles-alojamiento">
+  <div class="detalles-header">
+    <button (click)="regresar()" class="back-btn" aria-label="Volver">
+      <span class="arrow">&#8592;</span>
+    </button>
+    <h2 class="titulo-alojamiento">{{ alojamiento?.nombre }}</h2>
+  </div>
+  <!-- Organismo Principal: Información del Alojamiento -->
+  <section class="info-principal">
+    <div class="imagen-alojamiento">
+      <img [src]="alojamiento?.imagenUrl" [alt]="'Imagen principal de ' + alojamiento?.nombre" fallbackSrc />
+      <div class="thumbnails" *ngIf="alojamiento?.pictures?.length > 1">
+        <img *ngFor="let pic of alojamiento.pictures" [src]="pic.url" [alt]="pic.title || alojamiento?.nombre" (click)="cambiarImagenPrincipal(pic.url)" [class.active]="pic.url === alojamiento.imagenUrl" fallbackSrc />
+      </div>
+    </div>
+    <div class="reserva-box">
+      <form (ngSubmit)="reservar()">
+        <div class="campos-fechas">
+          <app-label text="Llegada"></app-label>
+          <input type="date" [(ngModel)]="fechaLlegada" name="fechaLlegada" (change)="onFechasChange()" required>
+          <app-label text="Salida"></app-label>
+          <input type="date" [(ngModel)]="fechaSalida" name="fechaSalida" [min]="fechaLlegada || null" (change)="onFechasChange()" required>
+        </div>
+        <div class="campo-huespedes">
+          <app-label text="Huéspedes"></app-label>
+          <input type="number" min="1" [max]="capacidadMax || null" [(ngModel)]="cantidadHuespedes" name="cantidadHuespedes" (input)="onHuespedesChange()" [title]="capacidadMax ? 'Capacidad máxima: ' + capacidadMax : ''" required>
+        </div>
+        <div class="total-box">
+          <span>Total</span>
+          <h3>{{ total | currency:'COP':'symbol':'1.0-0' }}</h3>
+        </div>
+        <app-button [text]="reservando ? 'Reservando...' : 'Reservar'" type="submit" [disabled]="reservando"></app-button>
+        <button type="button" class="fav-btn" [disabled]="favorito" (click)="agregarFavoritos()">
+          <span [style.color]="favorito ? 'crimson' : '#333'">❤</span> {{ favorito ? 'Guardado' : 'Guardar' }}
+        </button>
+        <div *ngIf="errorReserva" style="color:#b00020; font-size:.9rem; margin-top:.25rem;">{{ errorReserva }}</div>
+      </form>
+    </div>
+  </section>
+  <!-- Organismo Secundario: Descripción y Datos -->
+  <section class="descripcion-box">
+    <p>{{ alojamiento?.descripcion }}</p>
+    <div class="datos-detalle">
+      <div><strong>Dirección:</strong> {{ alojamiento?.direccion }}</div>
+      <div><strong>Ciudad:</strong> {{ alojamiento?.ciudad }}</div>
+      <div><strong>Departamento:</strong> {{ alojamiento?.departamento || 'N/D' }}</div>
+      <div><strong>Capacidad:</strong> {{ alojamiento?.capacidad }}</div>
+    </div>
+  </section>
+  <!-- Organismo Secundario: Calificación, Precio y Anfitrión -->
+  <section class="info-adicional">
+    <div class="calificacion"><app-star-rating [calificacion]="alojamiento?.estrellas"></app-star-rating></div>
+    <div class="precio"><strong>Precio:</strong> {{ alojamiento?.precio | currency:'COP':'symbol' }} x Día</div>
+    <div class="anfitrion" *ngIf="alojamiento?.anfitrion">
+      <app-avatar [src]="alojamiento?.anfitrionImagen"></app-avatar>
+      <span>{{ alojamiento?.anfitrion }}</span>
+    </div>
+  </section>
+</div>
+<app-footer></app-footer>

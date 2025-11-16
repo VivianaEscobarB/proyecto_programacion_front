@@ -1,0 +1,21 @@
+@use '../../../../assets/styles/variables' as v;
+
+.stars {
+  color: #ffd700;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.stars .filled {
+  color: #ffd700;
+}
+.stars span {
+  color: #ccc;
+}
+.rating-number {
+  color: v.$color-text-primary;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-left: 4px;
+}

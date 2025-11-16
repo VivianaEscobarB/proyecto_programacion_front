@@ -1,0 +1,100 @@
+<app-header></app-header>
+<main class="user-account-main">
+  <section class="profile-block">
+    <div class="profile-card">
+      <div class="img-container">
+        <img [src]="user?.urlAccountPhoto || '/assets/images/user_image_default.png'" alt="Foto perfil" />
+      </div>
+      <h2>{{ (user?.firstName || '') + ' ' + (user?.lastName || '') }}</h2>
+      <p class="user-rol">Anfitrión</p>
+    </div>
+    <div class="profile-details-card">
+      <h3>Datos personales</h3>
+      <div class="details-row">
+        <label>Fecha de nacimiento</label>
+        <span>{{ user?.dayOfBirth || 'N/D' }}</span>
+      </div>
+      <div class="details-row">
+        <label>Correo electrónico</label>
+        <span>{{ user?.email || 'N/D' }}</span>
+      </div>
+      <div class="details-row">
+        <label>Número telefónico</label>
+        <span>{{ user?.phoneNumber || 'N/D' }}</span>
+      </div>
+      <div class="details-row">
+        <label>Dirección</label>
+        <span>{{ user?.homeAddress || 'N/D' }}</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="profile-details-card" >
+    <h3>Historial de reservas</h3>
+    <div class="toolbar">
+      <label>Estado:
+        <select (change)="cambiarFiltroEstado($any($event.target).value)">
+          <option value="">Todos</option>
+          <option>Pendiente</option>
+          <option>Aprobada</option>
+          <option>Confirmada</option>
+          <option>Rechazada</option>
+          <option>Cancelada</option>
+          <option>Finalizada</option>
+        </select>
+      </label>
+      <div class="pagination-controls">
+        <button (click)="anterior()" [disabled]="page===0">◀</button>
+        <span>Página {{ page + 1 }}</span>
+        <button (click)="siguiente()" [disabled]="reservas.length < size">▶</button>
+      </div>
+    </div>
+    <div *ngIf="mensaje" style="background:#e0f4ff; padding:.5rem .75rem; border-radius:6px; margin-bottom:.5rem; color:#03415e; font-size:.85rem;">{{ mensaje }}</div>
+    <div *ngIf="cargando">Cargando...</div>
+    <table *ngIf="!cargando" class="table-reservations">
+      <thead>
+        <tr style="text-align:center;">
+          <th>Alojamiento</th>
+          <th>Ciudad</th>
+          <th>Cliente</th>
+          <th>Check-in</th>
+          <th>Check-out</th>
+          <th>Huéspedes</th>
+          <th>Valor</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of reservas" class="reservation-row">
+          <td>{{ r.accommodationTitle || ('#'+r.accommodationId) }}</td>
+          <td>{{ r.cityName || '—' }}</td>
+          <td>
+            <div>{{ r.guestName || ('Usuario ' + r.userId) }}</div>
+            <small style="color:#666;">{{ r.guestEmail }}</small>
+          </td>
+          <td>{{ r.checkIn }}</td>
+          <td>{{ r.checkOut }}</td>
+          <td>{{ r.countRoommates }}</td>
+          <td>{{ r.estimatedTotal || 0 | currency:'COP':'symbol':'1.0-0' }}</td>
+          <td>{{ r.stateName }}</td>
+          <td>
+            <button (click)="aprobar(r.id)" [disabled]="r.stateName==='Aprobada' || r.stateName==='Confirmada' || r.stateName==='Finalizada'">✔</button>
+            <button (click)="rechazar(r.id)" [disabled]="r.stateName==='Rechazada' || r.stateName==='Cancelada' || r.stateName==='Finalizada'">✖</button>
+            <button (click)="finalizar(r.id)" [disabled]="r.stateName==='Cancelada' || r.stateName==='Rechazada' || r.stateName==='Finalizada'">⏱</button>
+          </td>
+          <td>
+            <button (click)="eliminar(r.id)" [disabled]="!(r.stateName==='Cancelada'|| r.stateName==='Rechazada'|| r.stateName==='Finalizada')">🗑</button>
+          </td>
+          <td></td>
+        </tr>
+        <tr *ngIf="reservas.length===0 && !cargando">
+          <td colspan="9">Sin reservas para mostrar</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+<app-footer></app-footer>

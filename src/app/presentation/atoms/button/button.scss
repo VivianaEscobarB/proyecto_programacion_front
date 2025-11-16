@@ -1,0 +1,142 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  overflow: hidden;
+  font-family: inherit;
+  min-height: 40px;
+  
+  &:focus-visible {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  /*Primary variant (Registrarse button)*/
+  &-primary {
+    background-color: #3B4C8B;
+    color: #FFFFFF;
+    
+    &:hover:not(:disabled) {
+      background-color: #2D3A6B;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(59, 76, 139, 0.3);
+    }
+    
+    &:active:not(:disabled) {
+      transform: translateY(0);
+      box-shadow: 0 2px 6px rgba(59, 76, 139, 0.3);
+    }
+    
+    &:focus-visible {
+      box-shadow: 0 0 0 3px rgba(59, 76, 139, 0.3);
+    }
+  }
+  
+  /* Secondary variant*/
+  &-secondary {
+    background-color: #FFFFFF;
+    color: #3B4C8B;
+    border: 2px solid #3B4C8B;
+    
+    &:hover:not(:disabled) {
+      background-color: #F5F6F8;
+      transform: translateY(-1px);
+    }
+    
+    &:active:not(:disabled) {
+      transform: translateY(0);
+      background-color: #E5E7EB;
+    }
+    
+    &:focus-visible {
+      box-shadow: 0 0 0 3px rgba(59, 76, 139, 0.2);
+    }
+  }
+  
+  /* Text variant (Inicia Sesión link-style button)*/
+  &-text {
+    background-color: transparent;
+    color: #3B4C8B;
+    padding: 0.5rem 1rem;
+    
+    &:hover:not(:disabled) {
+      background-color: rgba(59, 76, 139, 0.05);
+      text-decoration: underline;
+    }
+    
+    &:active:not(:disabled) {
+      background-color: rgba(59, 76, 139, 0.1);
+    }
+    
+    &:focus-visible {
+      box-shadow: 0 0 0 2px rgba(59, 76, 139, 0.2);
+    }
+  }
+  
+  /* Full width modifier*/
+  &-full-width {
+    width: 100%;
+  }
+  
+  /* Loading state*/
+  &-loading {
+    pointer-events: none;
+  }
+  
+  &-content {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    
+    &-loading {
+      visibility: hidden;
+    }
+  }
+  
+  &-spinner {
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #FFFFFF;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive styles*/
+@media screen and (max-width: 768px) {
+  .btn {
+    min-height: 44px;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .btn:not(.btn-text) {
+    width: 100%;
+  }
+}

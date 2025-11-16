@@ -1,0 +1,25 @@
+<header class="header">
+  <div class="header__logo">
+    <img (click)="toMain()" src="/assets/images/logo_text.svg" alt="Logo Horen" />
+  </div>
+  <nav class="header__nav">
+    <a routerLink="/" class="nav-link" (click)="toMain()">Inicio</a>
+    <a routerLink="/alojamientos" class="nav-link" (click)="toAccommodations()"  >Alojamientos</a>
+    <a routerLink="/nosotros" class="nav-link" (click)="toAboutUs()">Nosotros</a>
+  </nav>
+
+  <div class="header__actions" *ngIf="!isLoggedIn; else userBlock">
+    <a routerLink="/login" class="btn btn-outline" (click)="toLogin()">Iniciar sesión</a>
+    <a routerLink="/registro" class="btn btn-primary">Regístrate</a>
+  </div>
+
+  <ng-template #userBlock>
+    <div class="header__user">
+
+      <span class="user-rol">{{ user.role }}</span>
+      <button *ngIf="user.role==='ANFITRION'" class="btn btn-outline" (click)="toHostAccount()">Panel Anfitrión</button>
+      <button class="btn btn-outline" (click)="logout()">Cerrar sesión</button>
+      <img (click)="toAccount()" [src]="user.imageUrl" class="user-img" alt="Foto perfil" *ngIf="user.imageUrl" fallbackSrc/>
+    </div>
+  </ng-template>
+</header>
